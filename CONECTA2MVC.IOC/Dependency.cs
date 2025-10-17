@@ -10,6 +10,8 @@ using CONECTA2MVC.Datos.DBContextCONECTA2;
 using Microsoft.EntityFrameworkCore;
 using CONECTA2MVC.Datos.Interfaces;
 using CONECTA2MVC.Datos.Implementaciones;
+using CONECTA2MVC.Negocio.Interfaces;
+using CONECTA2MVC.Negocio.Implementaciones;
 
 namespace CONECTA2MVC.IOC
 {
@@ -18,6 +20,7 @@ namespace CONECTA2MVC.IOC
         public static void InyectarDependencia(this IServiceCollection serv, IConfiguration config)
         {
 
+            //Dependencia de conexion de Base de Datos
             serv.AddDbContext<DBContextConecta2>(options =>
             {
 
@@ -25,7 +28,11 @@ namespace CONECTA2MVC.IOC
 
             });
 
+            //Dependencia generica CRUD general
             serv.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+            //Dependencias CRUD personalizadas
+            serv.AddScoped<IRolService, RolService>();
 
         }
     }
