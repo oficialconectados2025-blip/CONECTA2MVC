@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Home"] || CONECTA2</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/assets/fonts/abril_fatface.css" />
-    <link rel="stylesheet" href="~/assets/fonts/poppins.css" />
+    <link rel="stylesheet" href="~/css/main.css"/>
+    <link rel="stylesheet" href="~/fonts/abril_fatface.css" />
+    <link rel="stylesheet" href="~/fonts/poppins.css" />
     @* <link rel="stylesheet" href="~/CONECTA2MVC.styles.css" asp-append-version="true" /> *@
+    @await RenderSectionAsync("Estilos", required: false)
 </head>
 <body>
 
@@ -49,7 +50,7 @@
             <div class="header-inner">
                 <a class="logo-container" href="index.html" aria-label="Ir al inicio">
                     <div class="logo-media">
-                        <img src="./assets/img/image.png" alt="CONECTA2" />
+                        <img src="./img/image.png" alt="CONECTA2" />
                     </div>
                     <div class="logo-copy">
                         <h4 class="logo-title">CONECTA2</h4>
@@ -68,7 +69,7 @@
                     </ul>
 
                     <a class="user-button" href="login.html" aria-label="Iniciar sesión">
-                        <img src="./assets/img/uinterface-black.webp" class="user-image" alt="" />
+                        <img src="./img/uinterface-black.webp" class="user-image" alt="" />
                         <span class="user-button__label">Login</span>
                     </a>
                 </nav>
@@ -81,9 +82,75 @@
                 </button>
             </div>
         </header>
+        <!-- 👇 MUY IMPORTANTE: fuera del header -->
+        <div class="scrim" id="scrim" hidden></div>
+        <aside class="drawer" id="drawer" aria-hidden="true" aria-labelledby="hamburger">
+            <!-- Header del drawer -->
+            <div class="drawer__hero">
+                <h3 class="drawer__brand" id="drawerBrand">Conecta2</h3>
+                <button class="drawer__close" id="drawerClose" aria-label="Cerrar menú">✕</button>
+            </div>
+
+
+            <!-- Navegación -->
+            <nav class="drawer__nav" aria-label="Menú">
+                <a class="drawer__link" href="index.html">
+                    <span class="ico ico-home" aria-hidden="true"></span>
+                    <span class="label">Inicio</span>
+                    <span class="chev" aria-hidden="true">›</span>
+                </a>
+
+                <a class="drawer__link" href="#">
+                    <span class="ico ico-mail" aria-hidden="true"></span>
+                    <span class="label">Contacto</span>
+                    <span class="chev" aria-hidden="true">›</span>
+                </a>
+
+                <a class="drawer__link" href="profile.html?view=miperfil&id=me&name=Mi%20Perfil&src=header">
+                    <span class="ico ico-info" aria-hidden="true"></span>
+                    <span class="label">Acerca de</span>
+                    <span class="chev" aria-hidden="true">›</span>
+                </a>
+
+                <a class="drawer__link" href="profile.html?view=miperfil&id=me&name=Mi%20Perfil&src=header">
+                    <span class="ico ico-user" aria-hidden="true"></span>
+                    <span class="label">Mi perfil</span>
+                    <span class="chev" aria-hidden="true">›</span>
+                </a>
+            </nav>
+
+            <!-- CTA -->
+            <div class="drawer__cta">
+                <a class="drawer__btn" href="login.html">
+                    <span class="ico ico-lock" aria-hidden="true"></span>
+                    <span>Login</span>
+                </a>
+            </div>
+
+            <!-- Footer pequeño -->
+            <div class="drawer__foot">
+                <a href="#" class="mini">Términos</a>
+                <span>·</span>
+                <a href="#" class="mini">Privacidad</a>
+            </div>
+        </aside>
+
+        <div class="section-ct-search">
+            <div class="buttons-container">
+                <a href="curses.html" class="btn btnCours">CURSOS</a>
+                <!-- RUTA RELATIVA -->
+                <a href="tutorials.html" class="btn btnTutorial">TUTORIALES</a>
+            </div>
+
+            <div class="search-container">
+                <!-- YA ERA RELATIVA -->
+                <img src="assets/img/icono-search.png" alt="">
+                <input type="text" placeholder="Juntos conectamos al mundo...">
+            </div>
+        </div>
     </div>
 
-    <div class="container">
+    <div class="landing-body">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -94,7 +161,7 @@
         <div id="chat-circle" class="waves-effect waves-circle btn btn-circle btn-sm btn-info l-h-45 d-flex justify-content-center align-items-center" aria-label="Abrir chat">
             <div id="chat-overlay"></div>
             <video autoplay loop muted class="chat-icon">
-                <source src="assets/img/chatbot.webm" type="video/webm">
+                <source src="./img/chatbot.webm" type="video/webm">
                 Tu navegador no soporta el formato de video.
             </video>
         </div>
@@ -127,7 +194,7 @@
                     <div class="chat-msg user">
                         <div class="d-flex align-items-center">
                             <span class="msg-avatar">
-                                <img src="assets/img/nicaraguabot.webp" class="avatar avatar-lg" alt="Avatar del bot">
+                                <img src="./img/nicaraguabot.webp" class="avatar avatar-lg" alt="Avatar del bot">
                             </span>
                             <div class="mx-10">
                                 <a href="#" class="text-dark hover-primary fw-bold">Bot</a>
@@ -158,7 +225,7 @@
     @* <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script> *@
-    <script src="~/assets/js/main.js"></script>
+    <script src="~/js/main.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

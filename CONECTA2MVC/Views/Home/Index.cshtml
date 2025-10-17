@@ -2,7 +2,177 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@section Estilos {
+    @* <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/assets/fonts/abril_fatface.css" />
+    <link rel="stylesheet" href="~/assets/fonts/poppins.css" /> *@
+}
+
+
+<div class="slider">
+    <!-- Carril de diapositivas -->
+    <div class="slides">
+        <div class="slide active">
+            <!-- RUTA RELATIVA -->
+            <img class="imagen-slider" src="./img/img-sliders/web_development.webp" alt="Introducción a la programación">
+            <button class="slide-button">Comenzar</button>
+            <div class="slide-content">
+                <h2>Desarrollo web</h2>
+                <p>Aprende a desarrollar sitios web utilizando aplicaciones MVC en C# con una arquitectura de capas en .NET 7. Domina las herramientas y técnicas necesarias para crear aplicaciones web robustas y escalables.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <img class="imagen-slider" src="./img/img-sliders/livestock_development.webp" alt="Introducción a la programación">
+            <button class="slide-button">Comenzar</button>
+            <div class="slide-content">
+                <h2>Manejo y Alimentación de Ganado Bovino</h2>
+                <p>Este curso está diseñado para proporcionar a los participantes una comprensión integral sobre el manejo y la alimentación del ganado bovino, enfocándose en mejorar la producción y la salud del rebaño.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <img class="imagen-slider" src="./img/img-sliders/math.webp" alt="Introducción a la programación">
+            <button class="slide-button">Comenzar</button>
+            <div class="slide-content">
+                <h2>Matemáticas Básicas</h2>
+                <p>Este curso cubre los fundamentos de las matemáticas, incluyendo aritmética, fracciones, decimales y porcentajes. Está diseñado para reforzar las bases matemáticas necesarias para cursos más avanzados.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <img class="imagen-slider" src="./img/img-sliders/history.webp" alt="Introducción a la programación">
+            <button class="slide-button">Comenzar</button>
+            <div class="slide-content">
+                <h2>Historia de America</h2>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae, repudiandae ut ullam, nostrum aperiam alias consectetur, quod libero ea distinctio iure veritatis dolores? Inventore, nulla?</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Flechas de navegación (presentes en TODAS las pantallas) -->
+    <button class="nav-arrow prev" type="button" aria-label="Anterior"></button>
+    <button class="nav-arrow next" type="button" aria-label="Siguiente"></button>
+
+    <!-- Puntos de navegación -->
+    <div class="slider-nav" role="tablist" aria-label="Indicadores del slider">
+        <button class="nav-dot active" type="button" aria-label="Ir al slide 1" data-slide="0"></button>
+        <button class="nav-dot" type="button" aria-label="Ir al slide 2" data-slide="1"></button>
+        <button class="nav-dot" type="button" aria-label="Ir al slide 3" data-slide="2"></button>
+        <button class="nav-dot" type="button" aria-label="Ir al slide 4" data-slide="3"></button>
+    </div>
 </div>
+
+<div class="divider"></div>
+
+<section id="videos-recomendados" class="videos" aria-labelledby="videos-title">
+    <div class="videos-shell">
+        <h2 id="videos-title">Videos Recomendados</h2>
+
+        <div class="videos-grid">
+            <!-- CARD 1 -->
+            <article class="video-card">
+                <a class="card-link" href="video.html" data-video="curso-js-basico">
+                    <figure class="thumb">
+                        <img loading="lazy" src="./img/Videos-Cursos/Thumbnail-1.jpg" alt="Curso de JavaScript Básico">
+                        <span class="badge badge-cat">Curso</span>
+                        <span class="badge badge-duration">12:48</span>
+                        <span class="play-badge" aria-hidden="true"></span>
+                    </figure>
+                    <div class="card-body">
+                        <h3 class="title">Curso de JavaScript Básico</h3>
+                        <p class="excerpt">Aprende JS desde cero con ejemplos prácticos.</p>
+                        <ul class="meta">
+                            <li>10 lecciones</li>
+                            <li>Nivel: Básico</li>
+                        </ul>
+                    </div>
+                </a>
+            </article>
+
+            <!-- CARD 2 -->
+            <article class="video-card">
+                <a class="card-link" href="video.html" data-video="curso-html-css">
+                    <figure class="thumb">
+                        <img loading="lazy" src="./img/Videos-Cursos/Thumbnail-2.jpg" alt="HTML & CSS Moderno">
+                        <span class="badge badge-cat">Tutorial</span>
+                        <span class="badge badge-duration">08:20</span>
+                        <span class="play-badge" aria-hidden="true"></span>
+                    </figure>
+                    <div class="card-body">
+                        <h3 class="title">HTML & CSS Moderno</h3>
+                        <p class="excerpt">Flexbox, Grid, responsive y tips de producción.</p>
+                        <ul class="meta">
+                            <li>7 lecciones</li>
+                            <li>Nivel: Intermedio</li>
+                        </ul>
+                    </div>
+                </a>
+            </article>
+
+            <!-- CARD 3 -->
+            <article class="video-card">
+                <a class="card-link" href="video.html" data-video="tutorial-fetch-api">
+                    <figure class="thumb">
+                        <img loading="lazy" src="./img/Videos-Cursos/Thumbnail-3.jpg" alt="Fetch API con JavaScript">
+                        <span class="badge badge-cat">Curso</span>
+                        <span class="badge badge-duration">15:03</span>
+                        <span class="play-badge" aria-hidden="true"></span>
+                    </figure>
+                    <div class="card-body">
+                        <h3 class="title">Fetch API con JavaScript</h3>
+                        <p class="excerpt">GET/POST, manejo de errores, async/await.</p>
+                        <ul class="meta">
+                            <li>12 lecciones</li>
+                            <li>Nivel: Avanzado</li>
+                        </ul>
+                    </div>
+                </a>
+            </article>
+
+            <!-- CARD 4 -->
+            <article class="video-card">
+                <a class="card-link" href="video.html" data-video="curso-js-avanzado">
+                    <figure class="thumb">
+                        <img loading="lazy" src="./img/Videos-Cursos/Thumbnail-4.jpg" alt="JavaScript Avanzado">
+                        <span class="badge badge-cat">Tutorial</span>
+                        <span class="badge badge-duration">05:39</span>
+                        <span class="play-badge" aria-hidden="true"></span>
+                    </figure>
+                    <div class="card-body">
+                        <h3 class="title">JavaScript Avanzado</h3>
+                        <p class="excerpt">Patrones, rendimiento, microtasks.</p>
+                        <ul class="meta">
+                            <li>5 lecciones</li>
+                            <li>Nivel: Básico</li>
+                        </ul>
+                    </div>
+                </a>
+            </article>
+
+            <!-- CARD 5 (usa uno existente por ahora) -->
+            <article class="video-card">
+                <a class="card-link" href="video.html" data-video="curso-html-css">
+                    <figure class="thumb">
+                        <img loading="lazy" src="./img/Videos-Cursos/Thumbnail-5.jpg" alt="HTML & CSS Moderno">
+                        <span class="badge badge-cat">Curso</span>
+                        <span class="badge badge-duration">09:57</span>
+                        <span class="play-badge" aria-hidden="true"></span>
+                    </figure>
+                    <div class="card-body">
+                        <h3 class="title">HTML & CSS Moderno</h3>
+                        <p class="excerpt">Flexbox, Grid, responsive y tips de producción.</p>
+                        <ul class="meta">
+                            <li>9 lecciones</li>
+                            <li>Nivel: Intermedio</li>
+                        </ul>
+                    </div>
+                </a>
+            </article>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+
+}
