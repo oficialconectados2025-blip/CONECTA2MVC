@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Home"] || CONECTA2</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/assets/fonts/abril_fatface.css" />
+    <link rel="stylesheet" href="~/assets/fonts/poppins.css" />
+    @* <link rel="stylesheet" href="~/CONECTA2MVC.styles.css" asp-append-version="true" /> *@
+</head>
+<body>
+
+    <div id="loading-screen">
+        <div class="loader-card">
+            <div class="loader-brand">
+                <!-- opcional: tu icono -->
+                <!-- <img src="./assets/img/image.png" alt="" width="52" height="52"> -->
+                <div class="loader-title">CONECTA2</div>
+                <div class="loader-slogan">Juntos conectamos el mundo</div>
+            </div>
+
+            <div class="thermo">
+                <svg class="thermo-svg" viewBox="0 0 120 120" aria-hidden="true">
+                    <defs>
+                        <linearGradient id="thermoGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#3be4d8" />
+                            <stop offset="100%" stop-color="#7aa7ff" />
+                        </linearGradient>
+                    </defs>
+                    <circle class="thermo-track" cx="60" cy="60" r="52"></circle>
+                    <circle class="thermo-fill" cx="60" cy="60" r="52"></circle>
+                </svg>
+                <div class="thermo-percent" id="thermoPercent">0%</div>
+            </div>
+
+            <div class="loader-progress">
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-val" id="progressVal">0%</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="container" class="hidden">
+        <header class="app-header" role="banner">
+            <div class="header-inner">
+                <a class="logo-container" href="index.html" aria-label="Ir al inicio">
+                    <div class="logo-media">
+                        <img src="./assets/img/image.png" alt="CONECTA2" />
+                    </div>
+                    <div class="logo-copy">
+                        <h4 class="logo-title">CONECTA2</h4>
+                        <h6 class="logo-slogan">Juntos conectamos el mundo</h6>
+                    </div>
+                </a>
+
+                <nav class="site-nav" aria-label="Principal">
+                    <ul class="nav-list">
+                        <li class="menu-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                        <li class="menu-item"><a class="nav-link" href="#">Contacto</a></li>
+                        <li class="menu-item"><a class="nav-link" href="#">Acerca de</a></li>
+                        <li class="menu-item">
+                            <a class="nav-link" href="profile.html?view=miperfil&id=me&name=Mi%20Perfil&src=header">Mi Perfil</a>
+                        </li>
+                    </ul>
+
+                    <a class="user-button" href="login.html" aria-label="Iniciar sesión">
+                        <img src="./assets/img/uinterface-black.webp" class="user-image" alt="" />
+                        <span class="user-button__label">Login</span>
+                    </a>
+                </nav>
+
+                <button class="hamburger" id="hamburger"
+                        aria-label="Abrir menú" aria-controls="drawer" aria-expanded="false">
+                    <span class="hamburger__bar" aria-hidden="true"></span>
+                    <span class="hamburger__bar" aria-hidden="true"></span>
+                    <span class="hamburger__bar" aria-hidden="true"></span>
+                </button>
+            </div>
+        </header>
+    </div>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <div id="chat-box-body">
+        <!-- Botón flotante -->
+        <div id="chat-circle" class="waves-effect waves-circle btn btn-circle btn-sm btn-info l-h-45 d-flex justify-content-center align-items-center" aria-label="Abrir chat">
+            <div id="chat-overlay"></div>
+            <video autoplay loop muted class="chat-icon">
+                <source src="assets/img/chatbot.webm" type="video/webm">
+                Tu navegador no soporta el formato de video.
+            </video>
+        </div>
+
+        <!-- Ventana del chat -->
+        <div class="chat-box" role="dialog" aria-label="ChatBot" aria-modal="true">
+            <div class="chat-box-header p-15 d-flex justify-content-between align-items-center">
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <div class="text-dark fs-18">ChatBot</div>
+                    <div>
+                        <span class="badge badge-sm badge-dot badge-primary"></span>
+                        <span class="text-muted fs-12">Atención 24/7</span>
+                    </div>
+                </div>
+
+                <!-- Cerrar (icono CSS) -->
+                <div class="chat-box-toggle">
+                    <button id="chat-box-toggle"
+                            class="waves-effect waves-circle btn btn-circle h-40 w-40 rounded-circle d-flex justify-content-center align-items-center"
+                            type="button" aria-label="Cerrar chat">
+                        <span class="c2-icon c2-icon-close" aria-hidden="true"></span>
+                        <span class="sr-only">Cerrar</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="chat-box-body">
+                <div class="chat-box-overlay"></div>
+                <div class="chat-logs pb-3" aria-live="polite" aria-relevant="additions">
+                    <div class="chat-msg user">
+                        <div class="d-flex align-items-center">
+                            <span class="msg-avatar">
+                                <img src="assets/img/nicaraguabot.webp" class="avatar avatar-lg" alt="Avatar del bot">
+                            </span>
+                            <div class="mx-10">
+                                <a href="#" class="text-dark hover-primary fw-bold">Bot</a>
+                                <p class="text-muted fs-12 mb-0">Activo</p>
+                            </div>
+                        </div>
+                        <div class="cm-msg-text">
+                            Hola, ¿cómo puedo ayudarte?
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input SIEMPRE abajo -->
+            <div class="chat-input">
+                <form action="#" autocomplete="off">
+                    <input id="chat-input" type="text" placeholder="Envía un mensaje…" aria-label="Escribe tu mensaje">
+                    <button type="submit"
+                            class="chat-submit d-flex justify-content-center align-items-center"
+                            id="chat-submit" aria-label="Enviar mensaje">
+                        <span class="c2-icon c2-icon-send" aria-hidden="true"></span>
+                        <span class="sr-only">Enviar</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    @* <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script> *@
+    <script src="~/assets/js/main.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

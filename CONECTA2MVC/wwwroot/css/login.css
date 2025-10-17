@@ -1,0 +1,164 @@
+/* Fuentes tipograficas */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", system-ui;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('../img/fondo3.webp') no-repeat center center/cover;
+}
+
+.container {
+    position: relative;
+    width: 700px;
+    height: 490px;
+    border: 1px solid #fff;
+    border-radius: 25px;
+    background-color: rgba(0, 0, 0, 0.397);
+}
+
+.container .form-box{
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+form{
+    text-align: center;
+}
+
+form h1 {
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+}
+
+form p{
+    color: #fff;
+    font-size: 15px;
+    margin-top: -5px;
+}
+
+ .password-cont{
+    position: relative;
+ }
+
+.password-cont i {
+    position: absolute;
+    right: 40px; 
+    transform: translateY(-50%);
+    color: rgba(0, 0, 0, 0.7);
+    cursor: pointer; 
+    display: flex;
+    top: 65%;
+}
+
+.username input,
+.password-cont  input {
+    position: relative;
+    padding: 12px;
+    margin-top: 20px;
+    width: 300px;
+    border: none;
+    outline: none;
+    border-radius: 30px;
+    background-color: #fff;
+    color: rgb(17, 17, 17);
+    font-size: 1rem;
+}
+
+.input-renember-pass {
+    margin-top: 13px;
+    color: white;
+}
+
+.input-renember-pass a{
+    color: #fff;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.login-button{
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+}
+
+.login-button a{
+    display: block;
+    width: 300px;
+    padding: 12px;
+    /* margin: 20px auto; */
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0);
+    border: 1px solid #fff;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 30px;
+}
+
+.login-button a:hover {
+    background: #fff;
+    color: black;
+}
+
+.register-link {
+    color: white;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.register-link a{
+    /* text-decoration: none; */
+    color: #fff;
+}
+
+.container-cohete {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.container-cohete.Login{
+    right: 0;
+}
+
+.container-cohete img{
+    width: 350px;
+}
+
+.container-cohete p {
+    color: #fff;
+    font-size: 1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

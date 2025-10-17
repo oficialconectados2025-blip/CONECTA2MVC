@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CONECTA2MVC.Datos\CONECTA2MVC.Datos.csproj" />
+    <ProjectReference Include="..\CONECTA2MVC.Negocio\CONECTA2MVC.Negocio.csproj" />
+  </ItemGroup>
+
+</Project>
