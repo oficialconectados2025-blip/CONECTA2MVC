@@ -11,8 +11,4 @@
     <ProjectReference Include="..\CONECTA2MVC.Entidad\CONECTA2MVC.Entidad.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Implementaciones\" />
-  </ItemGroup>
-
 </Project>

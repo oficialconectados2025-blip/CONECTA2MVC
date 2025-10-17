@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using CONECTA2MVC.Datos.DBContextCONECTA2;
 using Microsoft.EntityFrameworkCore;
+using CONECTA2MVC.Datos.Interfaces;
+using CONECTA2MVC.Datos.Implementaciones;
 
 namespace CONECTA2MVC.IOC
 {
@@ -22,6 +24,8 @@ namespace CONECTA2MVC.IOC
                 options.UseNpgsql(config.GetConnectionString("CadenaPgAdmin"));
 
             });
+
+            serv.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
         }
     }

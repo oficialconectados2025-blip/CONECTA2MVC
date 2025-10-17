@@ -23,7 +23,7 @@ namespace CONECTA2MVC.Datos.Implementaciones
             
         }
 
-        public async Task<IQueryable<TEntity>> Consultar(Expression<Func<TEntity, bool>> filt)
+        public async Task<IQueryable<TEntity>> Consultar(Expression<Func<TEntity, bool>> filt = null)
         {
 
             IQueryable<TEntity> queryEntidad = filt == null ? _context.Set<TEntity>() : _context.Set<TEntity>().Where(filt);
