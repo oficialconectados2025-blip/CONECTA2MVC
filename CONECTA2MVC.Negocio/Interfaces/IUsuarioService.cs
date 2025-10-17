@@ -12,11 +12,12 @@ namespace CONECTA2MVC.Negocio.Interfaces
 
         Task<List<Usuario>> Lista();
         Task<Usuario> Crear(Usuario entidad);
-        Task<Usuario> Editar(Usuario entidad);
-        Task<Usuario> Eliminar(Usuario entidad);
+        Task<bool> Editar(Usuario entidad);
+        Task<bool> Eliminar(int id);
         Task<IQueryable<Usuario>> ObtenerTodo();
 
         Task<Usuario> ObtenerPorNombre(int id);
+        Task<bool> Inhabilitar(int id);
 
     }
 }
