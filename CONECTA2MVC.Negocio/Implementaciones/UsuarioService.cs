@@ -72,10 +72,11 @@ namespace CONECTA2MVC.Negocio.Implementaciones
             }
         }
 
-        public Task<bool> Inhabilitar(int id)
-        {
-            throw new NotImplementedException();
-        }
+        // Accion a futuro
+        //public Task<bool> Inhabilitar(int id)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public async Task<List<Usuario>> Lista()
         {
@@ -92,9 +93,9 @@ namespace CONECTA2MVC.Negocio.Implementaciones
             }
         }
 
-        public Task<Usuario> ObtenerPorNombre(int id)
+        public async Task<Usuario> ObtenerPorNombre(string nombre)
         {
-            throw new NotImplementedException();
+            IQueryable<Usuario> query = await _rep.Obtener(u => u.Nombreusuario == nombre);
         }
 
         public Task<IQueryable<Usuario>> ObtenerTodo()

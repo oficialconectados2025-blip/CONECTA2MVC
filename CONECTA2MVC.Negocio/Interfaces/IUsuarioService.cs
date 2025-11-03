@@ -16,8 +16,8 @@ namespace CONECTA2MVC.Negocio.Interfaces
         Task<bool> Eliminar(int id);
         Task<IQueryable<Usuario>> ObtenerTodo();
 
-        Task<Usuario> ObtenerPorNombre(int id);
-        Task<bool> Inhabilitar(int id);
+        Task<Usuario> ObtenerPorNombre(string nombre);
+        //Task<bool> Inhabilitar(int id); // esto es para futuro
 
     }
 }

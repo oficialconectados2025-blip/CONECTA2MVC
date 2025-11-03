@@ -81,7 +81,7 @@ namespace CONECTA2MVC.Datos.Implementaciones
             }
         }
 
-        public async Task<TEntity> Obtener(Expression<Func<TEntity, bool>> filt)
+        public async Task<TEntity> Obtener(Expression<Func<TEntity, bool>> filt = null)
         {
             try
             {

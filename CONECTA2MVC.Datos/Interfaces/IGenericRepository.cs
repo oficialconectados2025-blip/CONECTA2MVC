@@ -10,7 +10,7 @@ namespace CONECTA2MVC.Datos.Interfaces
 {
     public interface IGenericRepository<TEntity> where TEntity : class
     {
-        Task<TEntity> Obtener(Expression<Func<TEntity, bool>> filt);
+        Task<TEntity> Obtener(Expression<Func<TEntity, bool>> filt = null);
         Task<TEntity> Crear(TEntity entidad);
         Task<bool> Eliminar(TEntity entidad);
         Task<bool> Editar(TEntity entidad);
