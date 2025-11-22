@@ -5316,246 +5316,424 @@ body {
     }
 }
 
+/* INICIO Tutoriales*/
 :root {
     --tut-bg: #0b1220;
-    --tut-surface: #0f1729;
+    --tut-surface: #0d172e;
     --tut-surface-2: #0c1422;
-    --tut-chip: #121c2d;
+    --tut-chip: #152d57;
     --tut-chip-b: #223049;
-    --tut-text: #e6ecff;
-    --tut-dim: #9fb0d6;
+    --tut-text: #ffffff;
+    --tut-dim: #f5e9e9;
     --tut-dimmer: #6a7ea8;
     --tut-border: #23324a;
     --tut-accent: #7aa7ff;
     --tut-accent-2: #3be4d8;
     --tut-radius: 14px;
-    --tut-shadow: 0 12px 38px rgba(0,0,0,.35)
+    --tut-shadow: 0 12px 38px rgba(0, 0, 0, .35);
 }
 
-.\74 ut-app, .\74 ut-app * {
-    box-sizing: border-box
+/* ===============================
+   LOADER CON SATÉLITE / COHETE
+   =============================== */
+
+/* Aseguramos que thermo sea relativo */
+.thermo {
+    position: relative;
+    width: 164px;
+    height: 164px;
+    margin: 10px auto 0;
 }
 
-:is(.\74 ut-app) {
+/* Círculo / fuego de progreso (JS ya lo anima) */
+.thermo-svg {
+    width: 164px;
+    height: 164px;
+    display: block;
+    transform: rotate(-90deg);
+    filter: drop-shadow(0 8px 22px rgba(0,0,0,.35));
+}
+
+.thermo-track {
+    fill: none;
+    stroke: rgba(255,255,255,.14);
+    stroke-width: 12;
+}
+
+.thermo-fill {
+    fill: none;
+    stroke: url(#thermoGrad);
+    stroke-width: 12;
+    stroke-linecap: round;
+    stroke-dasharray: 0;
+    stroke-dashoffset: 0;
+    filter: drop-shadow(0 0 16px rgba(255, 122, 26, 0.7));
+}
+
+.thermo-percent {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-family: "Poppins", system-ui;
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: .6px;
+    text-shadow: 0 2px 6px rgba(0,0,0,.35);
+}
+
+/* ============================
+   ÓRBITA DEL SATÉLITE/COHETE
+   ============================ */
+
+/* Anillo invisible del tamaño del loader */
+.loader-orbit {
+    position: absolute;
+    inset: 0;
+    width: 164px;
+    height: 164px;
+    margin: auto;
+    pointer-events: none;
+    transform-origin: 50% 50%; /* rotación desde el centro */
+}
+
+/* Cohete pequeño colocado en el borde superior */
+.loader-rocket {
+    position: absolute;
+    width: 18px;
+    height: 30px;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%); /* centro del cohete justo en el borde */
+}
+
+/* Cuerpo */
+.loader-rocket-body {
+    position: relative;
+    width: 14px;
+    height: 20px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, #e5f0ff, #9fb7ff);
+    border-radius: 8px 8px 4px 4px;
+    box-shadow: 0 0 6px rgba(111, 175, 255, .7);
+}
+
+    /* Nariz */
+    .loader-rocket-body::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: -8px;
+        transform: translateX(-50%);
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        border-bottom: 11px solid #4f46e5;
+    }
+
+/* Ventana */
+.loader-rocket-window {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #ffffff, #38bdf8);
+    box-shadow: 0 0 4px rgba(56, 189, 248, .9);
+}
+
+/* Aletas */
+.loader-rocket-fin {
+    position: absolute;
+    bottom: -3px;
+    width: 6px;
+    height: 8px;
+    background: #f97316;
+}
+
+.loader-rocket-fin-left {
+    left: -4px;
+    border-radius: 8px 0 6px 6px;
+    transform: skewY(10deg);
+}
+
+.loader-rocket-fin-right {
+    right: -4px;
+    border-radius: 0 8px 6px 6px;
+    transform: skewY(-10deg);
+}
+
+/* Llama del motor */
+.loader-rocket-flame {
+    position: absolute;
+    left: 50%;
+    bottom: -12px;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 14px;
+    background: radial-gradient(circle at 50% 0%, #fff7c2 0%, #facc15 35%, #f97316 65%, #dc2626 100%);
+    border-radius: 50%;
+    filter: blur(0.4px);
+    animation: loader-rocket-flame 0.25s infinite alternate;
+}
+
+/* Flicker del fuego */
+@keyframes loader-rocket-flame {
+    0% {
+        transform: translateX(-50%) scaleY(0.9);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateX(-50%) scaleY(1.3);
+        opacity: 1;
+    }
+}
+
+
+/* App de tutoriales */
+.tut-app,
+.tut-app * {
+    box-sizing: border-box;
+}
+
+.tut-app {
     background: var(--tut-bg);
     color: var(--tut-text);
     min-height: 100svh;
-    padding-top: clamp(10px,1.8vw,18px)
+    padding-top: clamp(10px, 1.8vw, 18px);
 }
 
-.\74 ut-shell {
+/* Layout general: sidebar + contenido */
+.tut-shell {
     display: grid;
-    grid-template-columns: 240px minmax(0,1fr);
-    gap: clamp(12px,2vw,20px);
-    padding-inline: clamp(12px,3vw,20px);
-    padding-bottom: clamp(12px,4vw,32px)
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: clamp(12px, 2vw, 20px);
+    padding-inline: clamp(12px, 3vw, 20px);
+    padding-bottom: clamp(12px, 4vw, 32px);
 }
 
-@media(max-width:1200px) {
+@media (max-width: 1200px) {
     .tut-shell {
-        grid-template-columns: 220px 1fr
+        grid-template-columns: 220px 1fr;
     }
 }
 
-@media(max-width:992px) {
+@media (max-width: 992px) {
     .tut-shell {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr;
     }
 }
 
-:is(.\74 ut-main) {
-    min-width: 0
+.tut-main {
+    min-width: 0;
 }
 
 [hidden] {
-    display: none !important
+    display: none !important;
 }
 
-.\74 ut-left {
+/* Sidebar izquierda */
+.tut-left {
     background: var(--tut-surface);
     border: 1px solid var(--tut-border);
     border-radius: var(--tut-radius);
     height: calc(100svh - 120px);
     position: sticky;
-    top: clamp(10px,1.8vw,18px);
+    top: clamp(10px, 1.8vw, 18px);
     overflow: hidden;
-    box-shadow: var(--tut-shadow)
+    box-shadow: var(--tut-shadow);
 }
 
-:is(.\74 ut-left__scroll) {
+.tut-left__scroll {
     overflow: auto;
-    padding: 10px
+    padding: 10px;
 }
 
-.\74 ut-left__item {
+.tut-left__item {
     display: flex;
     gap: 12px;
     align-items: center;
     padding: 10px 12px;
     border-radius: 10px;
     color: var(--tut-text);
-    text-decoration: none
+    text-decoration: none;
 }
 
-    .\74 ut-left__item:hover {
-        background: var(--tut-chip)
-    }
-
-    .\74 ut-left__item.\69 s-active {
+    .tut-left__item:hover {
         background: var(--tut-chip);
-        border: 1px solid var(--tut-chip-b)
     }
 
-:is(.\74 ut-left__sep) {
+    .tut-left__item.is-active {
+        background: var(--tut-chip);
+        border: 1px solid var(--tut-chip-b);
+    }
+
+.tut-left__sep {
     height: 1px;
     background: var(--tut-border);
-    margin: 10px 8px
+    margin: 10px 8px;
 }
 
-.\74 ut-left__caption {
+.tut-left__caption {
     color: var(--tut-dim);
     font-size: 12px;
-    padding: 6px 12px
+    padding: 6px 12px;
 }
 
-@media(max-width:992px) {
+/* Sidebar como drawer en pantallas pequeñas */
+@media (max-width: 992px) {
     .tut-left {
         position: fixed;
         inset-block: 0;
         left: 0;
-        width: min(88vw,320px);
+        width: min(88vw, 320px);
         transform: translateX(-105%);
         transition: transform .28s ease;
         border-radius: 0;
         top: 0;
         height: 100svh;
-        z-index: 1200
+        z-index: 1200;
     }
 
         .tut-left.is-open {
-            transform: translateX(0)
+            transform: translateX(0);
         }
 
     .tut-drawer-backdrop {
         position: fixed;
         inset: 0;
-        background: rgba(0,0,0,.45);
+        background: rgba(0, 0, 0, .45);
         backdrop-filter: blur(2px);
-        z-index: 1190
+        z-index: 1190;
     }
 
     .tut-no-scroll {
-        overflow: hidden
+        overflow: hidden;
     }
 }
 
-:is(.\74 ut-toolbar) {
+/* Toolbar superior (buscador + filtros) */
+.tut-toolbar {
     position: sticky;
     top: 0;
     z-index: 10;
-    background: linear-gradient(180deg,rgba(11,18,32,.98),rgba(11,18,32,.80));
+    background: linear-gradient(180deg, rgba(31, 44, 70, 0.98), rgba(22, 36, 65, 0.8));
     backdrop-filter: blur(6px);
     border: 1px solid var(--tut-border);
     border-radius: var(--tut-radius);
     padding: 10px;
-    box-shadow: var(--tut-shadow)
+    box-shadow: var(--tut-shadow);
 }
 
-.\74 ut-search {
+/* Barra de búsqueda */
+.tut-search {
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 8px;
     background: var(--tut-surface);
     border-radius: 12px;
     padding: 8px 8px 8px 12px;
-    width: 100%
+    width: 100%;
 }
 
-:is(.\74 ut-search input) {
-    background: transparent;
-    border: 0;
-    outline: none;
-    color: var(--tut-text);
-    font-size: 15px;
-    width: 100%
-}
+    .tut-search input {
+        background: transparent;
+        border: 0;
+        outline: none;
+        color: var(--tut-text);
+        font-size: 15px;
+        width: 100%;
+    }
 
-.\74 ut-search button {
-    background: var(--tut-chip);
-    border: 1px solid var(--tut-chip-b);
-    color: var(--tut-dim);
-    padding: 8px 12px;
-    border-radius: 10px;
-    cursor: pointer
-}
+    .tut-search button {
+        background: var(--tut-chip);
+        border: 1px solid var(--tut-chip-b);
+        color: var(--tut-dim);
+        padding: 8px 12px;
+        border-radius: 10px;
+        cursor: pointer;
+    }
 
-.\74 ut-burger:focus-visible, .\74 ut-reel:focus-visible, .\74 ut-like:focus-visible, :is(.\74 ut-search button:focus-visible), :is(.\74 ut-more:focus-visible), .\74 ut-sub:focus-visible, :is(.\74 ut-chip:focus-visible) {
-    outline: 2px solid var(--tut-accent-2);
-    outline-offset: 2px
-}
+        /* Accesibilidad: focus visible en botones importantes */
+        .tut-burger:focus-visible,
+        .tut-reel:focus-visible,
+        .tut-like:focus-visible,
+        .tut-search button:focus-visible,
+        .tut-more:focus-visible,
+        .tut-sub:focus-visible,
+        .tut-chip:focus-visible {
+            outline: 2px solid var(--tut-accent-2);
+            outline-offset: 2px;
+        }
 
-:is(.\74 ut-burger-row) {
+/* Botón de abrir el menú (burger) en mobile */
+.tut-burger-row {
     display: none;
-    padding-top: 8px
+    padding-top: 8px;
 }
 
-@media(max-width:991.98px) {
+@media (max-width: 991.98px) {
     .tut-burger-row {
-        display: block
+        display: block;
     }
 }
 
-:is(.\74 ut-burger) {
+.tut-burger {
     width: 40px;
     height: 38px;
     border-radius: 10px;
     border: 1px solid var(--tut-border);
     background: var(--tut-surface-2);
     cursor: pointer;
-    position: relative
+    position: relative;
 }
 
-.\74 ut-burger::before, .\74 ut-burger::after {
-    content: "";
-    position: absolute;
-    left: 8px;
-    right: 8px;
-    height: 2px;
-    background: #bcd0ff
-}
+    .tut-burger::before,
+    .tut-burger::after {
+        content: "";
+        position: absolute;
+        left: 8px;
+        right: 8px;
+        height: 2px;
+        background: #bcd0ff;
+    }
 
-.\74 ut-burger::before {
-    top: 12px;
-    box-shadow: 0 6px 0 #bcd0ff
-}
+    .tut-burger::before {
+        top: 12px;
+        box-shadow: 0 6px 0 #bcd0ff;
+    }
 
-:is(.\74 ut-burger::after) {
-    top: 22px
-}
+    .tut-burger::after {
+        top: 22px;
+    }
 
-.\68 scroll {
+/* Scroll horizontal para chips, etc. */
+.hscroll {
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
-    scrollbar-color: var(--tut-border)transparent;
+    scrollbar-color: var(--tut-border) transparent;
     touch-action: pan-x;
-    overscroll-behavior-x: contain
+    overscroll-behavior-x: contain;
 }
 
-    .\68 scroll::-webkit-scrollbar {
-        height: 8px
+    .hscroll::-webkit-scrollbar {
+        height: 8px;
     }
 
-:is(.\74 ut-chips) {
+/* Chips de categorías (Todos, JS, HTML, etc.) */
+.tut-chips {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 6px 2px
+    padding: 6px 2px;
 }
 
-:is(.\74 ut-chip) {
+.tut-chip {
     flex: 0 0 auto;
     background: var(--tut-chip);
     border: 1px solid var(--tut-chip-b);
@@ -5564,73 +5742,76 @@ body {
     border-radius: 999px;
     font-size: 13px;
     cursor: pointer;
-    white-space: nowrap
+    white-space: nowrap;
 }
 
-.\74 ut-chip.\69 s-active {
-    background: linear-gradient(135deg,var(--tut-accent),var(--tut-accent-2));
-    color: #0b1220;
-    border-color: transparent;
-    font-weight: 700
+    .tut-chip.is-active {
+        background: linear-gradient(135deg, var(--tut-accent), var(--tut-accent-2));
+        color: #0b1220;
+        border-color: transparent;
+        font-weight: 700;
+    }
+
+/* Reels / videos de tutoriales */
+.tut-reels {
+    width: 100%;
 }
 
-:is(.\74 ut-reels) {
-    width: 100%
-}
-
-:is(.\74 ut-reels--spaced) {
-    margin-top: clamp(16px,2.4vw,26px);
-    margin-bottom: clamp(18px,2.8vw,30px);
+.tut-reels--spaced {
+    margin-top: clamp(16px, 2.4vw, 26px);
+    margin-bottom: clamp(18px, 2.8vw, 30px);
     padding: 12px 10px;
     border: 1px solid var(--tut-border);
     border-radius: var(--tut-radius);
-    background: linear-gradient(180deg,rgba(15,23,41,.55),rgba(12,20,34,.35))
+    background: linear-gradient(180deg, rgba(15, 23, 41, .55), rgba(12, 20, 34, .35));
 }
 
-.\74 ut-reels__title {
+.tut-reels__title {
     font-weight: 700;
     margin: 0 6px 10px;
-    color: var(--tut-dim)
+    color: var(--tut-dim);
 }
 
-:is(.\74 ut-reels__strip) {
+.tut-reels__strip {
     display: flex;
-    gap: clamp(12px,1.6vw,18px);
-    padding: 2px 6px 8px
+    gap: clamp(12px, 1.6vw, 18px);
+    padding: 2px 6px 8px;
 }
 
-.\74 ut-reel {
+.tut-reel {
     flex: 0 0 auto;
     text-decoration: none;
     color: inherit;
-    width: clamp(148px,26vw,200px)
+    width: clamp(148px, 26vw, 200px);
 }
 
-:is(.\74 ut-reel__thumb) {
+.tut-reel__thumb {
     position: relative;
-    aspect-ratio: 9/16;
+    aspect-ratio: 9 / 16;
     overflow: hidden;
     background: #000;
     border: 1px solid var(--tut-border);
-    border-radius: 12px
+    border-radius: 12px;
 }
 
-:is(.\74 ut-reel__thumb img) {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block
-}
+    .tut-reel__thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
 
-.\74 ut-reel__title {
+.tut-reel__title {
     font-size: 13px;
     margin-top: 8px;
     line-height: 1.35;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    overflow: hidden
+    overflow: hidden;
 }
+
+/*FIN parte de tutoriales*/
 
 .\74 ut-reels__grid {
     display: grid;

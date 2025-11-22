@@ -95,7 +95,16 @@ namespace CONECTA2MVC.Negocio.Implementaciones
 
         public async Task<Usuario> ObtenerPorNombre(string nombre)
         {
-            IQueryable<Usuario> query = await _rep.Obtener(u => u.Nombreusuario == nombre);
+            // Devuelve UN usuario que cumpla la condición
+            Usuario usuario = await _rep.Obtener(u => u.Nombreusuario == nombre);
+
+            // Si quieres puedes validar null aquí y lanzar excepción
+            if (usuario == null)
+            {
+                throw new Exception("El usuario no existe");
+            }
+
+            return usuario;
         }
 
         public Task<IQueryable<Usuario>> ObtenerTodo()

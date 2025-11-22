@@ -1,0 +1,110 @@
+﻿@{
+    ViewData["Title"] = "Tutoriales";
+}
+
+@section Estilos {
+    <!-- Si tienes estilos específicos para esta página, agrégalos aquí -->
+    <!-- <link rel="stylesheet" href="~/css/tutorials.css" asp-append-version="true" /> -->
+}
+
+<!-- ✅ Loader (si quieres mantenerlo en esta página) -->
+<div id="loading-screen">
+    <div class="loader-card">
+        <div class="loader-brand">
+            <div class="loader-title">CONECTA2</div>
+            <div class="loader-slogan">Juntos conectamos el mundo</div>
+        </div>
+
+        <div class="thermo">
+            <svg class="thermo-svg" viewBox="0 0 120 120" aria-hidden="true">
+                <defs>
+                    <!-- 🔥 cambiamos estos colores a fuego -->
+                    <linearGradient id="thermoGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#FFB347" />
+                        <stop offset="50%" stop-color="#FF7A1A" />
+                        <stop offset="100%" stop-color="#FF3B3B" />
+                    </linearGradient>
+                </defs>
+                <circle class="thermo-track" cx="60" cy="60" r="52"></circle>
+                <circle class="thermo-fill" cx="60" cy="60" r="52"></circle>
+            </svg>
+
+            <!-- 🛰️ NUEVO: órbita + cohete/satélite -->
+            <div class="loader-orbit">
+                <div class="loader-rocket">
+                    <div class="loader-rocket-body">
+                        <div class="loader-rocket-window"></div>
+                    </div>
+                    <div class="loader-rocket-fin loader-rocket-fin-left"></div>
+                    <div class="loader-rocket-fin loader-rocket-fin-right"></div>
+                    <div class="loader-rocket-flame"></div>
+                </div>
+            </div>
+
+            <div class="thermo-percent" id="thermoPercent">0%</div>
+        </div>
+
+        <div class="loader-progress">
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-val" id="progressVal">0%</div>
+        </div>
+    </div>
+</div>
+
+<!-- ✅ Drawer lateral -->
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" aria-hidden="true" aria-labelledby="hamburger">
+    <div class="drawer__hero">
+        <h3 class="drawer__brand" id="drawerBrand">Conecta2</h3>
+        <button class="drawer__close" id="drawerClose" aria-label="Cerrar menú">✕</button>
+    </div>
+
+    <nav class="drawer__nav" aria-label="Menú">
+        <a class="drawer__link" asp-controller="Home" asp-action="Index">
+            <span class="ico ico-home"></span>
+            <span class="label">Inicio</span>
+            <span class="chev">›</span>
+        </a>
+
+        <a class="drawer__link" href="#">
+            <span class="ico ico-mail"></span>
+            <span class="label">Contacto</span>
+            <span class="chev">›</span>
+        </a>
+
+        <a class="drawer__link" href="#">
+            <span class="ico ico-info"></span>
+            <span class="label">Acerca de</span>
+            <span class="chev">›</span>
+        </a>
+
+        <a class="drawer__link" href="#">
+            <span class="ico ico-user"></span>
+            <span class="label">Mi perfil</span>
+            <span class="chev">›</span>
+        </a>
+    </nav>
+
+    <div class="drawer__cta">
+        <a class="drawer__btn" asp-controller="Login" asp-action="Index">
+            <span class="ico ico-lock"></span>
+            <span>Login</span>
+        </a>
+    </div>
+
+    <div class="drawer__foot">
+        <a href="#" class="mini">Términos</a>
+        <span>·</span>
+        <a href="#" class="mini">Privacidad</a>
+    </div>
+</aside>
+
+<div id="app" data-app-root></div>
+
+<noscript>Activa JavaScript para ver el contenido.</noscript>
+
+@section Scripts {
+    <script src="~/js/tutorials.js" defer asp-append-version="true"></script>
+}
