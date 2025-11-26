@@ -10,7 +10,7 @@ namespace CONECTA2MVC.Negocio.Interfaces
     {
         Task<string> GuardarImagen(Stream archivoStream, string tipoRecurso, string nombreArchivo);
         Task<string> ConvertToBase64(string tipoRecurso, string nombreArchivo);
-        Task<string> ActualizarImagen(Stream archivoStream, string tipoRecurso, string nombreArchivo);
+        Task<string> ActualizarImagen(Stream archivoStream, string tipoRecurso, string nombreAnterior, string extension);
         Task<string> EliminarStorage(string tipoRecurso, string nombreArchivo);
 
     }

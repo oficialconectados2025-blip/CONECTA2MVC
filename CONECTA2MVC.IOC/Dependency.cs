@@ -36,6 +36,7 @@ namespace CONECTA2MVC.IOC
             //Dependencias CRUD personalizadas
             serv.AddScoped<IRolService, RolService>();
             serv.AddScoped<IBase64IMGService, Base64IMGService>();
+            serv.AddScoped<ITutorialesService, TutorialesService>();
 
             // --------------------------------------
             // CONFIGURACIONES (Options Pattern)
