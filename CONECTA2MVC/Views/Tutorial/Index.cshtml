@@ -7,7 +7,7 @@
     <!-- <link rel="stylesheet" href="~/css/tutorials.css" asp-append-version="true" /> -->
 }
 
-<!-- ✅ Loader (si quieres mantenerlo en esta página) -->
+<!-- Loader -->
 <div id="loading-screen">
     <div class="loader-card">
         <div class="loader-brand">
@@ -101,9 +101,130 @@
     </div>
 </aside>
 
-<div id="app" data-app-root></div>
+<div id="app" data-app-root class="tut-app">
+    <div class="tut-shell">
+        <aside class="tut-left" id="tutLeft">
+            <div class="tut-left__scroll">
+                <!-- LOGO -->
+                <div class="tut-left__brand mb-3">
+                    <img src="~/img/LOGO-NUEVO.png" alt="CONECTA2"
+                         style="height:125px; margin-left: -17px;" />
+                </div>
+
+                <!-- MENÚ -->
+                <a class="tut-left__item is-active" href="#" data-action="principal">
+                    <i class="bi bi-house-door"></i>
+                    <span>Inicio</span>
+                </a>
+
+                <a class="tut-left__item" href="@Url.Action("Index", "Curses")">
+                    <span class="i"><i class="bi bi-mortarboard"></i></span>
+                    <span>Cursos</span>
+                </a>
+
+                <a class="tut-left__item" href="#" data-action="shorts">
+                    <i class="bi bi-lightning-charge"></i>
+                    <span>Cortos</span>
+                </a>
+
+                <a class="tut-left__item" href="#" data-action="subs">
+                    <i class="bi bi-collection-play"></i>
+                    <span>Suscripciones</span>
+                </a>
+
+                <div class="tut-left__sep"></div>
+
+                <a class="tut-left__item" href="#" data-action="history">
+                    <i class="bi bi-clock-history"></i>
+                    <span>Historial</span>
+                </a>
+
+                <a class="tut-left__item" href="#" data-action="likes">
+                    <i class="bi bi-hand-thumbs-up"></i>
+                    <span>Me gustan</span>
+                </a>
+                <a class="tut-left__item" href="#">
+                    <span class="i"><i class="bi bi-bell"></i></span>
+                    <span>Notificaciones</span>
+                </a>
+
+                <div class="tut-left__sep"></div>
+
+                <a class="tut-left__item" href="#">
+                    <span class="i"><i class="bi bi-info-circle"></i></span>
+                    <span>Acerca de</span>
+                </a>
+                
+
+                <div class="tut-left__sep"></div>
+
+
+                <!-- Mas cosas aqui -->
+            </div>
+
+            <div class="tut-left__footer" style="border-radius: 15px;">
+                <a class="tut-left__item" href="@Url.Action("Index","Usuario")">
+                    <i class="bi bi-box-arrow-in-right"></i>
+                    <span>Acceder</span>
+                </a>
+            </div>
+        </aside>
+
+        <div class="tut-main">
+            <div class="tut-toolbar">
+                <div class="tut-search tut-search--full">
+                    <input id="tutSearch" type="search" placeholder="Buscar tutoriales, tags o canal…" />
+                    <button id="tutSearchBtn">Buscar</button>
+                </div>
+            </div>
+
+            <div class="tut-burger-row">
+                <button class="tut-burger" id="tutBurger" aria-label="Abrir menú"></button>
+            </div>
+
+            <div class="tut-chips hscroll" id="tutChips" role="tablist" aria-label="Categorías"></div>
+
+            <!-- 1️⃣ VIDEOTUTORIALES - PROGRAMACIÓN (usa el JS actual de #tutGrid) -->
+            <section class="tut-results tut-section" id="tutResultsProgramacion">
+                <div class="d-flex justify-content-between align-items-center mb-2 px-1">
+                    <h5 class="mb-0">Programación</h5>
+                </div>
+
+                <div class="tut-grid" id="tutGrid" aria-live="polite"></div>
+
+                <!-- 👇 el sentinel se queda asociado a ESTA grilla (la que ya maneja tu JS) -->
+                <div class="tut-sentinel" id="tutSentinel" aria-hidden="true"></div>
+            </section>
+
+            <!-- 2️⃣ REELS (el JS ya escribe dentro de #tutReels) -->
+            <section class="tut-reels tut-reels--spaced" id="tutReels" aria-label="Reels">
+                <div class="tut-reels__title d-flex justify-content-between align-items-center">
+                    <span>Reels</span>
+                </div>
+
+                <!-- Tu JS actual ya reemplaza el contenido interno de esta sección -->
+            </section>
+
+            <!-- 3️⃣ VIDEOTUTORIALES - AGRICULTURA (maqueta para futuro backend/JS) -->
+            <section class="tut-results tut-section" id="tutResultsAgricultura">
+                <div class="d-flex justify-content-between align-items-center mb-2 px-1">
+                    <h5 class="mb-0">Videotutoriales de agricultura</h5>
+                </div>
+
+                <div class="tut-grid" id="tutGridAgricultura" aria-live="polite">
+                    @* Por ahora vacío. Más adelante lo llenas con backend o con otro fetch. *@
+                </div>
+            </section>
+
+            <section class="tut-list" id="tutList" hidden></section>
+        </div>
+    </div>
+
+    <div class="tut-drawer-backdrop" id="tutBackdrop" hidden></div>
+</div>
 
 <noscript>Activa JavaScript para ver el contenido.</noscript>
+
 
 @section Scripts {
     <script src="~/js/tutorials.js" defer asp-append-version="true"></script>

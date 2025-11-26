@@ -106,11 +106,10 @@
     })
 })()
 
-
     // =========================================================
     // 2) App de tutoriales / videos (principal, shorts, historial, likes, subs)
     // =========================================================
-    ; (function () {
+    ; (() => {
         'use strict'
 
         // -------------------------------------------------------
@@ -888,50 +887,20 @@
         }
 
         // -------------------------------------------------------
-        // Render de layout principal
+        // Render de layout principal (ya viene del .cshtml)
         // -------------------------------------------------------
         function initTutorialApp() {
             const app = $('#app')
             if (!app) return
 
+            // El HTML ya está en la vista
             app.classList.add('tut-app')
-            app.innerHTML = `
-      <div class="tut-shell">
-        <aside class="tut-left" id="tutLeft">
-          <div class="tut-left__scroll">
-            ${renderLeftMenu()}
-          </div>
-        </aside>
-        <div class="tut-main">
-          <div class="tut-toolbar">
-            <div class="tut-search tut-search--full">
-              <input id="tutSearch" type="search" placeholder="Buscar tutoriales, tags o canal…" />
-              <button id="tutSearchBtn">Buscar</button>
-            </div>
-          </div>
-          <div class="tut-burger-row">
-            <button class="tut-burger" id="tutBurger" aria-label="Abrir menú"></button>
-          </div>
-          <div class="tut-chips hscroll" id="tutChips" role="tablist" aria-label="Categorías"></div>
-
-          <section class="tut-reels tut-reels--spaced" id="tutReels" aria-label="Reels"></section>
-
-          <section class="tut-results">
-            <div class="tut-grid" id="tutGrid" aria-live="polite"></div>
-            <div class="tut-sentinel" id="tutSentinel" aria-hidden="true"></div>
-          </section>
-
-          <section class="tut-list" id="tutList" hidden></section>
-        </div>
-      </div>
-      <div class="tut-drawer-backdrop" id="tutBackdrop" hidden></div>
-    `
 
             // Drawer lateral móvil
-            $('#tutBurger').addEventListener('click', openLeftDrawer)
-            $('#tutBackdrop').addEventListener('click', closeLeftDrawer)
+            $('#tutBurger')?.addEventListener('click', openLeftDrawer)
+            $('#tutBackdrop')?.addEventListener('click', closeLeftDrawer)
 
-            $('#tutLeft').addEventListener('click', (event) => {
+            $('#tutLeft')?.addEventListener('click', (event) => {
                 const item = event.target.closest('[data-action]')
                 if (!item) return
 
@@ -950,17 +919,17 @@
             const searchBtn = $('#tutSearchBtn')
 
             const applySearch = () => {
-                state.q = (searchInput.value || '').trim().toLowerCase()
+                state.q = (searchInput?.value || '').trim().toLowerCase()
                 refreshViewContent()
             }
 
-            searchInput.addEventListener('input', applySearch)
-            searchInput.addEventListener('keydown', (event) => {
+            searchInput?.addEventListener('input', applySearch)
+            searchInput?.addEventListener('keydown', (event) => {
                 if (event.key === 'Enter') {
                     applySearch()
                 }
             })
-            searchBtn.addEventListener('click', applySearch)
+            searchBtn?.addEventListener('click', applySearch)
 
             // Scroll horizontal de chips
             const chipsEl = $('#tutChips')
@@ -994,41 +963,18 @@
                 })
         }
 
-        function renderLeftMenuItem(icon, label, action) {
-            return `
-      <a class="tut-left__item" href="#" data-action="${action}">
-        <span class="i">${icon}</span><span>${label}</span>
-      </a>
-    `
-        }
-
-        function renderLeftMenu() {
-            return `
-      ${renderLeftMenuItem('🏠', 'Principal', 'principal')}
-      ${renderLeftMenuItem('▶️', 'Shorts', 'shorts')}
-      ${renderLeftMenuItem('📺', 'Suscripciones', 'subs')}
-      <div class="tut-left__sep"></div>
-      ${renderLeftMenuItem('🕒', 'Historial', 'history')}
-      ${renderLeftMenuItem('👍', 'Videos que me gustan', 'likes')}
-      <div class="tut-left__sep"></div>
-      <div class="tut-left__caption">Suscripciones</div>
-      ${renderLeftMenuItem('🎵', 'Epic Music VN', 'subs')}
-      ${renderLeftMenuItem('💻', 'Dot CSV', 'subs')}
-      ${renderLeftMenuItem('🧪', 'Mat Virus', 'subs')}
-      ${renderLeftMenuItem('🕹️', 'Kaiko', 'subs')}
-    `
-        }
-
         function openLeftDrawer() {
             document.body.classList.add('tut-no-scroll')
-            $('#tutLeft').classList.add('is-open')
-            $('#tutBackdrop').hidden = false
+            $('#tutLeft')?.classList.add('is-open')
+            const bd = $('#tutBackdrop')
+            if (bd) bd.hidden = false
         }
 
         function closeLeftDrawer() {
             document.body.classList.remove('tut-no-scroll')
-            $('#tutLeft').classList.remove('is-open')
-            $('#tutBackdrop').hidden = true
+            $('#tutLeft')?.classList.remove('is-open')
+            const bd = $('#tutBackdrop')
+            if (bd) bd.hidden = true
         }
 
         // -------------------------------------------------------
@@ -1061,6 +1007,7 @@
             ])
 
             const chipsContainer = $('#tutChips')
+            if (!chipsContainer) return
 
             chipsContainer.innerHTML = baseTags
                 .map(
@@ -1185,6 +1132,8 @@
         // -------------------------------------------------------
         function renderReels() {
             const reelsSection = $('#tutReels')
+            if (!reelsSection) return
+
             const shorts = getShorts()
             const repeatedList = []
 
@@ -1209,7 +1158,7 @@
         </div>
       `
                 const strip = $('#tutReelsStrip')
-                strip.addEventListener(
+                strip?.addEventListener(
                     'wheel',
                     (event) => {
                         if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
@@ -1307,7 +1256,8 @@
         // -------------------------------------------------------
         async function resetAndRenderGrid() {
             if (state.view === 'shorts') {
-                $('#tutGrid').innerHTML = ''
+                const g = $('#tutGrid')
+                if (g) g.innerHTML = ''
                 return
             }
 
@@ -1319,6 +1269,8 @@
             state.filtered = filterVideos(baseList)
 
             const grid = $('#tutGrid')
+            if (!grid) return
+
             grid.innerHTML = ''
 
             if (!state.filtered.length) {
@@ -1345,9 +1297,12 @@
                 return
             }
 
+            const grid = $('#tutGrid')
+            if (!grid) return
+
             const fragment = document.createDocumentFragment()
             slice.forEach((video) => fragment.appendChild(createVideoCard(video)))
-            $('#tutGrid').appendChild(fragment)
+            grid.appendChild(fragment)
 
             state.page++
             state.loading = false
@@ -1484,6 +1439,8 @@
         // -------------------------------------------------------
         async function renderHistoryOrLikesList() {
             const container = $('#tutList')
+            if (!container) return
+
             container.innerHTML = ''
 
             const showEmpty = () => {
@@ -1670,7 +1627,6 @@
         // Iniciar app al cargar DOM
         document.addEventListener('DOMContentLoaded', initTutorialApp)
     })()
-
 
     // =========================================================
     // 3) Pantalla de carga / loading-screen

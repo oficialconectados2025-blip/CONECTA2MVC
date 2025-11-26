@@ -37,6 +37,7 @@ namespace CONECTA2MVC.IOC
             serv.AddScoped<IRolService, RolService>();
             serv.AddScoped<IBase64IMGService, Base64IMGService>();
             serv.AddScoped<ITutorialesService, TutorialesService>();
+            serv.AddScoped<IUsuarioService, UsuarioService>();
 
             // --------------------------------------
             // CONFIGURACIONES (Options Pattern)

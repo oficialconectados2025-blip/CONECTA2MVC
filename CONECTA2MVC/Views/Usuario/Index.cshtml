@@ -1,0 +1,229 @@
+﻿@{
+    ViewData["Title"] = "Usuarios - Login / Registro";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+
+            <div class="card shadow p-4">
+                <!-- Tabs de Login / Registro -->
+                @* <ul class="nav nav-pills justify-content-center mb-4" id="authTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active"
+                                id="tab-login"
+                                data-target="#viewLogin"
+                                type="button"
+                                role="tab">
+                            Iniciar sesión
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link"
+                                id="tab-register"
+                                data-target="#viewRegister"
+                                type="button"
+                                role="tab">
+                            Crear cuenta
+                        </button>
+                    </li>
+                </ul> *@
+
+                <!-- Mensajes globales (opcionales) -->
+                <div id="authGlobalError" class="alert alert-danger d-none"></div>
+
+                <!-- ====== VISTA LOGIN ====== -->
+                <div id="viewLogin" class="auth-view">
+                    <h4 class="text-center mb-3">Bienvenido de nuevo</h4>
+
+                    <div id="loginError" class="alert alert-danger d-none"></div>
+
+                    <form id="loginForm" autocomplete="off">
+                        <div class="mb-3">
+                            <label class="form-label">Nombre de Usuario</label>
+                            <input id="loginNombreUsuario"
+                                   name="nombreUsuario"
+                                   class="form-control"
+                                   placeholder="Ingrese su usuario" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Contraseña</label>
+                            <input id="loginContrasenia"
+                                   name="contrasenia"
+                                   type="password"
+                                   class="form-control"
+                                   placeholder="Ingrese su contraseña" />
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">
+                            Ingresar
+                        </button>
+
+                        <p class="text-center mt-3 mb-0 small">
+                            ¿No tienes cuenta?
+                            <a href="#" id="linkGoRegister">Crear cuenta</a>
+                        </p>
+                    </form>
+                </div>
+
+                <!-- ====== VISTA REGISTRO ====== -->
+                <div id="viewRegister" class="auth-view d-none">
+                    <h4 class="text-center mb-3">Crear cuenta</h4>
+
+                    <div id="registroError" class="alert alert-danger d-none"></div>
+                    <div id="registroSuccess" class="alert alert-success d-none"></div>
+
+                    <form id="registroForm" enctype="multipart/form-data" autocomplete="off">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Primer Nombre</label>
+                                <input id="regPrimerNombre" name="primerNombre" class="form-control" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Segundo Nombre</label>
+                                <input id="regSegundoNombre" name="segundoNombre" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Primer Apellido</label>
+                                <input id="regPrimerApellido" name="primerApellido" class="form-control" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Segundo Apellido</label>
+                                <input id="regSegundoApellido" name="segundoApellido" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Nombre de Usuario</label>
+                            <input id="regNombreUsuario" name="nombreUsuario" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Contraseña</label>
+                            <input id="regContrasenia"
+                                   name="contrasenia"
+                                   type="password"
+                                   class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Teléfono</label>
+                            <input id="regTelefono" name="telefono" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Descripción</label>
+                            <textarea id="regDescripcion"
+                                      name="descripcion"
+                                      class="form-control"
+                                      rows="2"></textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Rol</label>
+                                <select id="regIdRol" name="idRol" class="form-select">
+                                    <option value="">Seleccione un rol</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Idioma</label>
+                                <select id="regIdIdioma" name="idIdioma" class="form-select">
+                                    <option value="">Seleccione un idioma</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Imagen de Perfil</label>
+                            <input id="regImgUsuario"
+                                   name="imgUsuario"
+                                   type="file"
+                                   class="form-control"
+                                   accept="image/*" />
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100">
+                            Registrarme
+                        </button>
+
+                        <p class="text-center mt-3 mb-0 small">
+                            ¿Ya tienes cuenta?
+                            <a href="#" id="linkGoLogin">Iniciar sesión</a>
+                        </p>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            const tabs = document.querySelectorAll('#authTabs .nav-link');
+            const views = document.querySelectorAll('.auth-view');
+
+            function showView(targetSelector) {
+                // Cambiar pestañas activas
+                tabs.forEach(btn => {
+                    const target = btn.getAttribute('data-target');
+                    btn.classList.toggle('active', target === targetSelector);
+                });
+
+                // Mostrar/ocultar vistas
+                views.forEach(v => {
+                    if ('#' + v.id === targetSelector) {
+                        v.classList.remove('d-none');
+                    } else {
+                        v.classList.add('d-none');
+                    }
+                });
+            }
+
+            // Click en las pestañas
+            tabs.forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = this.getAttribute('data-target');
+                    showView(target);
+                });
+            });
+
+            // Links de texto dentro de los formularios
+            const linkGoRegister = document.getElementById('linkGoRegister');
+            const linkGoLogin = document.getElementById('linkGoLogin');
+
+            linkGoRegister?.addEventListener('click', function (e) {
+                e.preventDefault();
+                showView('#viewRegister');
+            });
+
+            linkGoLogin?.addEventListener('click', function (e) {
+                e.preventDefault();
+                showView('#viewLogin');
+            });
+
+            // ====== Aquí luego enganchas tu lógica con fetch ======
+
+            // LOGIN
+            // document.getElementById("loginForm").addEventListener("submit", async (e) => {
+            //     e.preventDefault();
+            //     // leer campos, hacer fetch POST, manejar respuesta, etc.
+            // });
+
+            // REGISTRO
+            // document.getElementById("registroForm").addEventListener("submit", async (e) => {
+            //     e.preventDefault();
+            //     // armar FormData o JSON, hacer fetch POST, manejar respuesta, etc.
+            // });
+
+        })();
+    </script>
+}
