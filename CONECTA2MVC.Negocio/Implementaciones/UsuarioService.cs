@@ -23,91 +23,37 @@ namespace CONECTA2MVC.Negocio.Implementaciones
             _rep = rep;
         }
 
-        public async Task<Usuario> Crear(Usuario entidad)
+        public Task<Usuario?> Actualizar(Usuario entidad, Stream? img = null, string? nombreArchivoImg = null)
         {
-            
-            var existe = (await _rep.Consultar(u => u.Nombreusuario == entidad.Nombreusuario)).Any();
-
-            if(existe)
-            {
-                throw new Exception("Este usuario ya existe");
-            }
-            else
-            {
-
-                return await _rep.Crear(entidad);
-
-            }
-
-
+            throw new NotImplementedException();
         }
 
-        public async Task<bool> Editar(Usuario entidad)
+        public Task<bool> Eliminar(int id)
         {
-            return await _rep.Editar(entidad);
+            throw new NotImplementedException();
         }
 
-        public async Task<bool> Eliminar(int id)
+        public Task<List<Usuario>> Lista()
         {
-            try
-            {
-
-                Usuario usuario_encontrado = await _rep.Obtener(u => u.Id == id); 
-
-                if(usuario_encontrado == null)
-                {
-
-                    throw new TaskCanceledException("El usuario no existe");
-
-                }
-
-                bool repuesta = await _rep.Eliminar(usuario_encontrado);
-
-                return repuesta;
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            throw new NotImplementedException();
         }
 
-        // Accion a futuro
-        //public Task<bool> Inhabilitar(int id)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        public async Task<List<Usuario>> Lista()
+        public Task<Usuario?> Login(string nombreUsuario, string password)
         {
-            try
-            {
-
-                IQueryable<Usuario> query = await _rep.Consultar();
-                return query.Include(r => r.IdrolNavigation).ToList();
-
-            }
-            catch (Exception ex) 
-            { 
-                throw new NotImplementedException(); 
-            }
+            throw new NotImplementedException();
         }
 
-        public async Task<Usuario> ObtenerPorNombre(string nombre)
+        public Task<Usuario?> ObtenerPorId(int id)
         {
-            // Devuelve UN usuario que cumpla la condición
-            Usuario usuario = await _rep.Obtener(u => u.Nombreusuario == nombre);
-
-            // Si quieres puedes validar null aquí y lanzar excepción
-            if (usuario == null)
-            {
-                throw new Exception("El usuario no existe");
-            }
-
-            return usuario;
+            throw new NotImplementedException();
         }
 
-        public Task<IQueryable<Usuario>> ObtenerTodo()
+        public Task<Usuario?> ObtenerPorNombreUsuario(string nombreUsuario)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Usuario?> Registrar(Usuario entidad, Stream? img = null, string? nombreArchivoImg = null)
         {
             throw new NotImplementedException();
         }

@@ -9,14 +9,18 @@ namespace CONECTA2MVC.Negocio.Interfaces
 {
     public interface IUsuarioService
     {
+        // CRUD básico
+        Task<List<Usuario>> Lista();                      // Read: lista
+        Task<Usuario?> Registrar(Usuario entidad, Stream? img = null, string? nombreArchivoImg = null); // Create
+        Task<Usuario?> Actualizar(Usuario entidad, Stream? img = null, string? nombreArchivoImg = null); // Update
+        Task<bool> Eliminar(int id);                      // Delete
 
-        Task<List<Usuario>> Lista();
-        Task<Usuario> Crear(Usuario entidad);
-        Task<bool> Editar(Usuario entidad);
-        Task<bool> Eliminar(int id);
-        Task<IQueryable<Usuario>> ObtenerTodo();
+        // Lecturas específicas
+        Task<Usuario?> ObtenerPorId(int id);
+        Task<Usuario?> ObtenerPorNombreUsuario(string nombreUsuario);
 
-        Task<Usuario> ObtenerPorNombre(string nombre);
+        // Autenticación básica (sin 2FA todavía)
+        Task<Usuario?> Login(string nombreUsuario, string password);
         //Task<bool> Inhabilitar(int id); // esto es para futuro
 
     }

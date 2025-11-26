@@ -144,22 +144,66 @@ namespace CONECTA2MVC.Negocio.Implementaciones
             }
         }
 
-        public  Task<string> ActualizarImagen(Stream archivoStream, string tipoRecurso, string nombreArchivo)
+        public async Task<string> ActualizarImagen(Stream archivoStream, string tipoRecurso, string nombreAnterior, string extension)
         {
+            if (archivoStream == null || !archivoStream.CanRead || archivoStream.Length == 0)
+                throw new ArgumentException("El stream de la imagen es inválido", nameof(archivoStream));
 
-            // First try to delete the img (if doesn't exist it isn't critical)
-            //await EliminarStorage(tipoRecurso, nombreArchivo);
-            throw new NotImplementedException();
-            // Save again
-            //return await GuardarImagen
+            if (archivoStream.CanSeek)
+                archivoStream.Position = 0;
 
+            if (string.IsNullOrWhiteSpace(extension))
+                extension = ".jpg"; // por defecto si quieres
+            if (!extension.StartsWith("."))
+                extension = "." + extension;
 
+            // Nuevo nombre
+            string nombreNuevo = $"{Guid.NewGuid()}{extension}";
+
+            if (!string.IsNullOrWhiteSpace(nombreAnterior))
+            {
+                await EliminarStorage(tipoRecurso, nombreAnterior);
+            }
+
+            await GuardarImagen(archivoStream, tipoRecurso, nombreNuevo);
+
+            // Ojo: aquí devuelves el nombre de archivo, no la URL
+            return nombreNuevo;
         }
 
-        public Task<string> EliminarStorage(string CarpetaDestino, string NombreArchivo)
+        public Task<string> EliminarStorage(string tipoRecurso, string nombreArchivo)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (string.IsNullOrWhiteSpace(tipoRecurso) || !_opt.RutasBase.ContainsKey(tipoRecurso))
+                {
+                    return Task.FromResult($"No existe configuracion para el recurso: '{tipoRecurso}'.");
+                }
+
+                if (string.IsNullOrWhiteSpace(nombreArchivo))
+                {
+                    return Task.FromResult("Nombre de archivo inválido.");
+                }
+
+                string rutaBase = _opt.RutasBase[tipoRecurso];
+                string nombreSeguro = Path.GetFileName(nombreArchivo);
+                string rutaFisica = Path.Combine(rutaBase, nombreSeguro);
+
+                if (!File.Exists(rutaFisica))
+                {
+                    return Task.FromResult("El archivo no existe.");
+                }
+
+                File.Delete(rutaFisica);
+
+                return Task.FromResult("Archivo eliminado correctamente.");
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult($"Error al eliminar la imagen: {ex.Message}");
+            }
         }
 
     }
+
 }

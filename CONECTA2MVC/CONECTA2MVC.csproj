@@ -30,4 +30,11 @@
     <Folder Include="wwwroot\CONECTA2IMGS\Usuarios\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\CONECTA2IMGS\Curso\" />
+    <Folder Include="wwwroot\CONECTA2IMGS\Unidad\" />
+    <Folder Include="wwwroot\CONECTA2IMGS\Tutoriales\" />
+    <Folder Include="wwwroot\CONECTA2IMGS\Usuarios\" />
+  </ItemGroup>
+
 </Project>
